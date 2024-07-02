@@ -1,0 +1,221 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload and Background Removal</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      #output {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+      #background-controls {
+        margin-top: 10px;
+        cursor: pointer;
+      }
+      .image-container {
+        position: relative;
+      }
+      .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        z-index: -1; /* Add this line */
+      }
+
+      .processed-image {
+        position: relative;
+        z-index: 1; /* Add this line */
+      }
+    </style>
+  </head>
+  <body>
+    <form
+      id="upload-form"
+      action="{% url 'process_image' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <label for="image">Select an image:</label>
+      <input type="file" name="image" required />
+      <button type="submit">Upload and Run</button>
+    </form>
+    <div id="output">
+      {% if output_image %}
+      <h3>Processed Image:</h3>
+      <div class="image-container">
+        <img id="background-image" src="" class="background-image" />
+        <img
+          id="processed-image"
+          src="{{ output_image }}?{{ forloop.counter }}"
+          alt="Output Image"
+          class="processed-image"
+        />
+      </div>
+      <br />
+      <a href="{{ output_image }}" download="output_image.png">
+        <button type="button">Download Processed Image</button>
+      </a>
+      {% else %}
+      <p>No output image available.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload and Background Removal</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+      }
+      .slide{
+        display:flex;
+      }
+      form#upload-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form#upload-form label,
+      form#upload-form input[type="file"],
+      form#upload-form button {
+        margin-bottom: 10px;
+      }
+
+      form#upload-form button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      form#upload-form button:hover {
+        background-color: #0056b3;
+      }
+
+      #output {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #output h3 {
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        color: #333;
+      }
+
+      #output p {
+        color: #666;
+      }
+
+      .image-container {
+        position: relative;
+        width: fit-content;
+        margin-bottom: 20px;
+      }
+
+      .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        z-index: -1;
+      }
+
+      .processed-image {
+        position: relative;
+        z-index: 1;
+      }
+
+      a button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      a button:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide">
+      <form
+      id="upload-form"
+      action="{% url 'process_image' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <label for="image">Select an image:</label>
+      <input type="file" name="image" required />
+      <button type="submit">Upload and Run</button>
+    </form>
+    <div id="output">
+      {% if output_image %}
+      <h3>Processed Image:</h3>
+      <div class="image-container">
+        <img id="background-image" src="" class="background-image" />
+        <img
+          id="processed-image"
+          src="{{ output_image }}?{{ forloop.counter }}"
+          alt="Output Image"
+          class="processed-image"
+        />
+      </div>
+      <a href="{{ output_image }}" download="output_image.png">
+        <button type="button">Download Processed Image</button>
+      </a>
+      {% else %}
+      <p>No output image available.</p>
+      {% endif %}
+    </div>
+    </div>
+    
+  </body>
+</html>
