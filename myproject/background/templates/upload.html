@@ -97,33 +97,35 @@
       .slide{
         display:flex;
       }
-      form#upload-form {
+      .form {
         display: flex;
         flex-direction: column;
         align-items: center;
         background: #fff;
         padding: 10px;
+        width: 300px;
+        height: 140px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
-      form#upload-form label,
-      form#upload-form input[type="file"],
-      form#upload-form button {
+      .form label,
+      .form input[type="file"],
+      .form button {
         margin-bottom: 10px;
       }
 
-      form#upload-form button {
+      .form button {
         background-color: #007bff;
         color: #fff;
         border: none;
         padding: 10px 20px;
-        border-radius: 5px;
+        border-radius: 25px;
         cursor: pointer;
       }
 
       form#upload-form button:hover {
-        background-color: #0056b3;
+        background-color: rgb(42, 174, 239);
       }
 
       #output {
@@ -170,29 +172,31 @@
       }
 
       a button {
-        background-color: #28a745;
+        background-color: #000000;
         color: #fff;
         border: none;
         padding: 10px 20px;
-        border-radius: 5px;
+        border-radius: 25px;
         cursor: pointer;
       }
 
       a button:hover {
-        background-color: #218838;
+        color: #000000;
+        border: #000000;
+        background-color: #a5a5a5;
       }
     </style>
   </head>
   <body>
     <div class="slide">
       <form
-      id="upload-form"
+      id="upload-form" class="form"
       action="{% url 'process_image' %}"
       method="post"
       enctype="multipart/form-data"
     >
       {% csrf_token %}
-      <label for="image">Select an image:</label>
+      <label for="image">upload image</label>
       <input type="file" name="image" required />
       <button type="submit">Upload and Run</button>
     </form>
