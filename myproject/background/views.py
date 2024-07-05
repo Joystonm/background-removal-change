@@ -15,10 +15,10 @@ def upload_image(request):
         with open(input_path, 'rb') as input_file:
             input_image = input_file.read()
 
-        # Process the image to remove the background
+        #remove the background
         output_image = remove(input_image)
 
-        # Generate a unique filename for the output image
+        #unique filename
         unique_filename = f"{uuid.uuid4().hex}.png"
         output_path = fs.path(unique_filename)
         with open(output_path, 'wb') as output_file:
