@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-     path('process_image/', views.upload_image, name='process_image')
+     path('process_image/', views.upload_image, name='process_image'),
+     path('replace/', views.process_image, name='replace'),
 ]
 
 if settings.DEBUG:
