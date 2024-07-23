@@ -108,24 +108,24 @@ def process_image(request):
         img = cv2.imread(fs.path(image_path), cv2.IMREAD_UNCHANGED)
         new_bg = cv2.imread(fs.path(background_path), cv2.IMREAD_UNCHANGED)
 
-        # Remove the background using rembg
+        # Remove 
         no_bg = remove(img)
 
         # Ensure new_bg has an alpha channel
         if new_bg.shape[2] == 3:
             new_bg = cv2.cvtColor(new_bg, cv2.COLOR_BGR2BGRA)
 
-        # Resize the new background image to match the original image size
+        # Resize
         new_bg = cv2.resize(new_bg, (img.shape[1], img.shape[0]))
 
-        # Combine the foreground (no_bg) with the new background
+        # Combine the foreground  with the new background
         alpha_s = no_bg[:, :, 3] / 255.0
         alpha_l = 1.0 - alpha_s
 
         for c in range(0, 3):
             new_bg[:, :, c] = (alpha_s * no_bg[:, :, c] + alpha_l * new_bg[:, :, c])
 
-        # Save the resulting image
+        # Save 
         result_path = fs.path('result.jpg')
         cv2.imwrite(result_path, new_bg)
 
