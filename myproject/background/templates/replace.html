@@ -1,24 +1,179 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html>
 <head>
     <title>Image Processor</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container {
+            margin-right: 20px;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input, button {
+            margin-bottom: 10px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    {% if result_url %}
-        <h1>Result Image</h1>
-        <img src="{{ result_url }}" alt="Result Image">
-        <br><br>
-        <a href="{% url 'process_image' %}">Process another image</a>
-    {% else %}
-        <h1>Upload Image</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="image">Select image:</label>
-            <input type="file" name="image" id="image" required><br><br>
-            <label for="background">Select background image:</label>
-            <input type="file" name="background" id="background" required><br><br>
-            <button type="submit">Upload</button>
-        </form>
-    {% endif %}
+    <div class="container">
+        <div class="form-container">
+            {% if result_url %}
+                <h1>Upload Another Image</h1>
+                <a href="{% url 'process_image' %}">Process another image</a>
+            {% else %}
+                <h1>Upload Image</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="image">Select image:</label>
+                    <input type="file" name="image" id="image" required><br><br>
+                    <label for="background">Select background image:</label>
+                    <input type="file" name="background" id="background" required><br><br>
+                    <button type="submit">Upload</button>
+                </form>
+            {% endif %}
+        </div>
+        {% if result_url %}
+            <div>
+                <h1>Result Image</h1>
+                <img src="{{ result_url }}" alt="Result Image">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background replacement</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container, .result-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form label, form input[type="file"], form button {
+            margin-bottom: 10px;
+        }
+        form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: rgb(42, 174, 239);
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        a button {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        a button:hover {
+            color: #000000;
+            border: #000000;
+            background-color: #a5a5a5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            {% if result_url %}
+                <h1>Upload Another Image</h1>
+                <a href="{% url 'process_image' %}"><button>Process another image</button></a>
+            {% else %}
+                <h1>Upload Image</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="image">Select image:</label>
+                    <input type="file" name="image" id="image" required><br><br>
+                    <label for="background">Select background image:</label>
+                    <input type="file" name="background" id="background" required><br><br>
+                    <button type="submit">Upload</button>
+                </form>
+            {% endif %}
+        </div>
+        {% if result_url %}
+            <div class="result-container">
+                <h1>Result Image</h1>
+                <img src="{{ result_url }}" alt="Result Image">
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
