@@ -21,24 +21,19 @@ This project is a Django-based web application for removing image backgrounds an
 
 ## Installation
 
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/Joystonm/background-removal-replacement.git
-    ```
-2. Activate the environment:
+1. Activate the environment:
 
     ```bash
     ./project/Scripts/Activate                                            
     ```
 
-3. Navigate to the project directory:
+2. Navigate to the project directory:
 
     ```bash
     cd  myproject   
     ```
 
-4. Run the Django server:
+3. Run the Django server:
 
     ```bash
     python manage.py runserver
