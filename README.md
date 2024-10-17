@@ -12,8 +12,8 @@ This project is a Django-based web application for removing image backgrounds an
 
 ## Requirements
 
-- Python 3.x
-- Django 4.x
+- Python 
+- Django 
 - OpenCV
 - rembg
 - Pillow
