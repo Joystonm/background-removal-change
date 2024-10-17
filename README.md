@@ -24,33 +24,31 @@ This project is a Django-based web application for removing image backgrounds an
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/background-removal-replacement.git
+    git clone https://github.com/Joystonm/background-removal-replacement.git
     ```
-
-2. Navigate to the project directory:
+2. Activate the environment:
 
     ```bash
-    cd background-removal-replacement
+    ./project/Scripts/Activate                                            
     ```
 
-3. Install the required dependencies:
+3. Navigate to the project directory:
 
     ```bash
-    pip install -r requirements.txt
+    cd  myproject   
     ```
 
 4. Run the Django server:
 
     ```bash
-    python manage.py migrate
     python manage.py runserver
     ```
 
 ## Usage
 
-### 1. Image Upload (Background Removal & Enhancement)
+### 1. Background Removal
 
-Navigate to `/upload/` to upload an image. The app removes the background, upscales the image, and enhances its sharpness. The processed image will be available for download.
+Navigate to `/process_image/` to upload an image. The app removes the background, upscales the image, and enhances its sharpness. The processed image will be available for download.
 
 ### 2. Background Replacement
 
